@@ -5,7 +5,7 @@ const {
   deleteItem,
   likeItem,
   dislikeItem,
-} = require("../controllers/closingItems");
+} = require("../controllers/clothingItems");
 //CRUD
 //Create
 //Read
