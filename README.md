@@ -102,6 +102,10 @@ Before committing your code, make sure you edit the file `sprint.txt` in the roo
 
 Bharat Saran
 
+## Project Pitch Video
+
+Check out [this video](https://drive.google.com/file/d/1XvKQXrd6vtyDjL8IDL0QdD1duF29ipSd/view?usp=drive_link), where I describe my project and some challenges I faced while building it.
+
 ## Project Status
 
 This project is part of Sprint 12 of the TripleTen Software Engineering program, focusing on back-end development fundamentals including database design, API creation, and server-side error handling.hat to Wear?): Back End

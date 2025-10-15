@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
 const mainRouter = require("./routes/index");
 
 // const user = require("./models/user");
@@ -14,15 +15,8 @@ mongoose
   })
   .catch(console.error);
 
+app.use(cors());
 app.use(express.json());
-
-// Temporary authorization middleware - hardcoded user for testing
-app.use((req, res, next) => {
-  req.user = {
-    _id: "5d8b8592978f8bd833ca8133", // Replace with your test user ID
-  };
-  next();
-});
 
 app.use("/", mainRouter);
 

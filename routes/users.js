@@ -1,8 +1,10 @@
 const router = require("express").Router();
-const { getUsers, createUser, getUser } = require("../controllers/users"); // used {} because we are exporting object from users controller
+const { getCurrentUser, updateUser } = require("../controllers/users");
 
-router.get("/", getUsers);
-router.get("/:userId", getUser);
-router.post("/", createUser);
+// Protected route to get current user's profile
+router.get("/me", getCurrentUser);
+
+// Protected route to update current user's profile
+router.patch("/me", updateUser);
 
 module.exports = router;

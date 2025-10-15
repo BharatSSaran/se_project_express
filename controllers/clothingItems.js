@@ -41,11 +41,23 @@ const createItem = (req, res) => {
 
 const deleteItem = (req, res) => {
   const { itemId } = req.params;
+  const userId = req.user._id; // Get current user ID from auth middleware
 
-  ClothingItem.findByIdAndDelete(itemId)
+  // First find the item to check ownership
+  ClothingItem.findById(itemId)
     .orFail()
     .then((item) => {
-      res.status(200).send(item);
+      // Check if the current user is the owner of the item
+      if (item.owner.toString() !== userId.toString()) {
+        return res
+          .status(ERROR_CODES.FORBIDDEN)
+          .send({ message: ERROR_MESSAGES.FORBIDDEN });
+      }
+
+      // If user is the owner, proceed with deletion
+      return ClothingItem.findByIdAndDelete(itemId).then((deletedItem) => {
+        res.status(200).send(deletedItem);
+      });
     })
     .catch((err) => {
       console.error("Error deleting item:", err);

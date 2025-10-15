@@ -6,14 +6,15 @@ const {
   likeItem,
   dislikeItem,
 } = require("../controllers/clothingItems");
-// CRUD
-// Create
-// Read
+const auth = require("../middlewares/auth");
 
+// Public route - no auth required
 router.get("/", getItems);
-router.post("/", createItem);
-router.delete("/:itemId", deleteItem);
-router.put("/:itemId/likes", likeItem);
-router.delete("/:itemId/likes", dislikeItem);
+
+// Protected routes - auth required
+router.post("/", auth, createItem);
+router.delete("/:itemId", auth, deleteItem);
+router.put("/:itemId/likes", auth, likeItem);
+router.delete("/:itemId/likes", auth, dislikeItem);
 
 module.exports = router;
