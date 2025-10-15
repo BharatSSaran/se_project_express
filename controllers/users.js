@@ -35,7 +35,7 @@ const createUser = (req, res) => {
       console.error(err);
       if (err.code === 11000) {
         return res
-          .status(409)
+          .status(ERROR_CODES.CONFLICT)
           .send({ message: "A user with this email already exists" });
       }
 
@@ -86,7 +86,9 @@ const login = (req, res) => {
     })
     .catch((err) => {
       console.error(err);
-      res.status(401).send({ message: "Incorrect email or password" });
+      res
+        .status(ERROR_CODES.UNAUTHORIZED)
+        .send({ message: "Incorrect email or password" });
     });
 };
 

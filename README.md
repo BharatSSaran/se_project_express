@@ -10,9 +10,10 @@ The API provides the following core features:
 
 ### User Management
 
-- Create new users with name and avatar
-- Retrieve all users
-- Get specific user by ID
+- User registration and authentication
+- JWT-based session management
+- Protected user profile access and updates
+- Secure password handling with bcrypt encryption
 
 ### Clothing Items Management
 
@@ -36,6 +37,8 @@ The API provides the following core features:
 - **Express.js** - Web application framework for building RESTful APIs
 - **MongoDB** - NoSQL database for data storage
 - **Mongoose** - MongoDB object modeling library for Node.js
+- **bcryptjs** - Password hashing library for secure authentication
+- **jsonwebtoken** - JWT implementation for user session management
 
 ### Development Tools
 
@@ -48,28 +51,33 @@ The API provides the following core features:
 
 - **MVC Architecture** - Separation of concerns with models, controllers, and routes
 - **Modular Design** - Organized file structure with dedicated folders for different components
+- **Authentication Middleware** - JWT-based route protection
 - **Error Handling** - Centralized error constants and consistent error responses
 
 ### Database Schema
 
-- **User Schema** - Name (2-30 characters), avatar URL with validation
+- **User Schema** - Name (2-30 characters), avatar URL with validation, email (unique), password (hashed)
 - **Clothing Item Schema** - Name, weather type (enum: hot/warm/cold), image URL, owner reference, likes array, creation timestamp
 
 ## API Endpoints
 
-### Users
+### Authentication
 
-- `GET /users` - Get all users
-- `GET /users/:userId` - Get user by ID
-- `POST /users` - Create new user
+- `POST /signup` - Register a new user
+- `POST /signin` - User login (returns JWT token)
+
+### Users (Protected Routes)
+
+- `GET /users/me` - Get current user's profile
+- `PATCH /users/me` - Update current user's profile
 
 ### Clothing Items
 
-- `GET /items` - Get all clothing items
-- `POST /items` - Create new clothing item
-- `DELETE /items/:itemId` - Delete clothing item
-- `PUT /items/:itemId/likes` - Like a clothing item
-- `DELETE /items/:itemId/likes` - Unlike a clothing item
+- `GET /items` - Get all clothing items (public)
+- `POST /items` - Create new clothing item (protected)
+- `DELETE /items/:itemId` - Delete clothing item (protected)
+- `PUT /items/:itemId/likes` - Like a clothing item (protected)
+- `DELETE /items/:itemId/likes` - Unlike a clothing item (protected)
 
 ## Running the Project
 
