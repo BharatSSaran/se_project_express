@@ -4,19 +4,6 @@ const User = require("../models/user");
 const { ERROR_CODES, ERROR_MESSAGES } = require("../utils/errors");
 const { JWT_SECRET } = require("../utils/config");
 
-const getUsers = (req, res) => {
-  User.find({})
-    .then((users) => {
-      res.status(200).send(users);
-    })
-    .catch((err) => {
-      console.error(err);
-      return res
-        .status(ERROR_CODES.INTERNAL_SERVER_ERROR)
-        .send({ message: ERROR_MESSAGES.INTERNAL_SERVER_ERROR });
-    });
-};
-
 const createUser = (req, res) => {
   const { name, avatar, email, password } = req.body;
 
@@ -76,6 +63,13 @@ const getCurrentUser = (req, res) => {
 const login = (req, res) => {
   const { email, password } = req.body;
 
+  // Check if email and password are provided
+  if (!email || !password) {
+    return res
+      .status(ERROR_CODES.BAD_REQUEST)
+      .send({ message: "Email and password are required" });
+  }
+
   return User.findUserByCredentials(email, password)
     .then((user) => {
       const token = jwt.sign({ _id: user._id }, JWT_SECRET, {
@@ -86,9 +80,18 @@ const login = (req, res) => {
     })
     .catch((err) => {
       console.error(err);
-      res
-        .status(ERROR_CODES.UNAUTHORIZED)
-        .send({ message: "Incorrect email or password" });
+
+      // Handle authentication errors with 401 status
+      if (err.message === "Incorrect email or password") {
+        return res
+          .status(ERROR_CODES.UNAUTHORIZED)
+          .send({ message: "Incorrect email or password" });
+      }
+
+      // Handle all other errors with 500 status
+      return res
+        .status(ERROR_CODES.INTERNAL_SERVER_ERROR)
+        .send({ message: ERROR_MESSAGES.INTERNAL_SERVER_ERROR });
     });
 };
 
@@ -129,4 +132,4 @@ const updateUser = (req, res) => {
     });
 };
 
-module.exports = { getUsers, createUser, getCurrentUser, updateUser, login };
+module.exports = { createUser, getCurrentUser, updateUser, login };
