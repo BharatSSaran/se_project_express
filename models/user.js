@@ -19,6 +19,7 @@ const userSchema = new mongoose.Schema({
       message: "You must enter a valid URL",
     },
   },
+  
 
   email: {
     type: String,
@@ -36,7 +37,7 @@ const userSchema = new mongoose.Schema({
     required: [true, "Password is required"],
     select: false, // Exclude password from query results by default
   },
-});
+});``
 
 // Static method to find user by credentials
 userSchema.statics.findUserByCredentials = function findUserByCredentials(

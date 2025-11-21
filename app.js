@@ -1,7 +1,10 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const { errors } = require("celebrate");
 const mainRouter = require("./routes/index");
+const errorHandler = require("./middlewares/error-handler");
+const { requestLogger, errorLogger } = require("./middlewares/logger");
 
 // const user = require("./models/user");
 
@@ -18,7 +21,19 @@ mongoose
 app.use(cors());
 app.use(express.json());
 
+// Request logger (must be before routes)
+app.use(requestLogger);
+
 app.use("/", mainRouter);
+
+// Error logger (must be after routes, before error handlers)
+app.use(errorLogger);
+
+// Celebrate error handler
+app.use(errors());
+
+// Centralized error handler (must be last)
+app.use(errorHandler);
 
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
