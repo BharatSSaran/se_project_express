@@ -1,5 +1,11 @@
 # WTWR (What to Wear?): Back End
 
+## Deployed Project
+
+- **Domain**: https://api.gcp-demo.what2no.com
+- **Frontend Repository**: https://github.com/BharatSSaran/se_project_react
+- **Project Pitch Video**: https://drive.google.com/file/d/1XvKQXrd6vtyDjL8IDL0QdD1duF29ipSd/view?usp=drive_link
+
 ## Description
 
 The WTWR (What to Wear?) back-end project is a RESTful API server that provides data management for a weather-based clothing recommendation application. This server handles user management, clothing item storage, and user interactions such as liking/disliking clothing items.
