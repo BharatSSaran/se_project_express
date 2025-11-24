@@ -4,7 +4,7 @@
 
 - **Domain**: https://api.gcp-demo.what2no.com
 - **Frontend Repository**: https://github.com/BharatSSaran/se_project_react
-- **Project Pitch Video**: https://drive.google.com/file/d/1XvKQXrd6vtyDjL8IDL0QdD1duF29ipSd/view?usp=drive_link
+- **Project Pitch Video**: https://drive.google.com/file/d/1Lst4OQFbPSNdKRTAcimLYu7kLvA0_3bQ/view?usp=drive_link
 
 ## Description
 
